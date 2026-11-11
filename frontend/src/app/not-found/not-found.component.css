@@ -1,0 +1,39 @@
+h1 {
+    color: #FFFFFF;
+    text-shadow: 6px 4px 12px rgba(64,64,64,0.75)
+  ,  2px 2px 0 #404040,
+                 2px -2px 0 #404040,
+                 -2px 2px 0 #404040,
+                 -2px -2px 0 #404040,
+                  2px 0px 0 #404040,
+                  0px 2px 0 #404040,
+                  -2px 0px 0 #404040,
+                  0px -2px 0 #404040;
+    font-size: 65px;
+    font-family: 'Assistant';
+    text-align: center;
+    direction: rtl;
+    }
+
+    a {
+        color: #FFFFFF;
+        text-shadow: 6px 4px 12px rgba(64,64,64,0.75)
+      ,  2px 2px 0 #404040,
+                     2px -2px 0 #404040,
+                     -2px 2px 0 #404040,
+                     -2px -2px 0 #404040,
+                      2px 0px 0 #404040,
+                      0px 2px 0 #404040,
+                      -2px 0px 0 #404040,
+                      0px -2px 0 #404040;
+        font-size: 65px;
+        font-family: 'Assistant';
+        text-align: center;
+        margin: auto;
+        padding: 20px;
+        width: 50%;
+        direction: rtl;
+        }
+    a:hover{
+        color: gray;
+    }

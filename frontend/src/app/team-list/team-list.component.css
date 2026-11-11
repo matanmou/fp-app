@@ -1,0 +1,28 @@
+.chosen{
+    direction: rtl;
+    text-decoration: line-through;
+    text-align: center;
+}
+
+.chos{
+    background-color:rgba(40, 40, 40, 0.1);
+}
+
+.modal-body{
+    text-align: right;
+}
+
+.cb{
+    position: absolute;
+    left: 0px;
+}
+
+.egul {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    border-width: 0.2em;
+    border-style: solid; 
+  }
+  

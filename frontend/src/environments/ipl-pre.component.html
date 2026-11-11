@@ -1,0 +1,24 @@
+<div class="container">
+  <table class="table table-dark container">
+    <thead>
+      <tr class="row container">
+        <th class="col-1 col-xs-2"></th>
+        <th class="col-9 col-xs-8" style="text-align: right">קבוצה</th>
+        <th class="col-2 col-xs-2" style="text-align: center">מיקום</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row container" *ngFor="let team of chosenTeams; let i = index">
+        <td class="col-9 col-xs-8" style="text-align: right">
+            בחר קבוצה
+          </td>
+              <td class="col-2 col-xs-2">
+                <img class="addSign" src="assets/imgs/addBut21.png" alt="הוסף קבוצה" width="30px" height="30px" />
+              </td>
+        <td class="col-1 col-xs-2" style="text-align: center">
+          {{i+1}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

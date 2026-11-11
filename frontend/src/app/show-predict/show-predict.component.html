@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+  
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col" class="mikum">מיקום</th>
+          <th scope="col" colspan="2">קבוצה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of chosenTeams; let i = index">
+          <th scope="row" class="mikum">{{ i + 1 }}</th>
+          <td class="teamPos" *ngIf="team == null">
+            <img
+            class="addSign"
+            src="assets/imgs/addBut21blank.png"
+            alt="לא נבחרה קבוצה"
+            width="30px"
+            height="30px"
+            />
+          </td>
+          <td *ngIf="team == null" class="rfe">
+            לא נבחרה קבוצה
+          </td>
+          <td class="teamPos" *ngIf="team != null">
+            <span
+            class="egul"
+            [ngStyle]="{
+              'background-color': team.pColor,
+              'border-color': team.sColor
+            }"
+            >
+            
+          </span>
+        </td>
+        <td *ngIf="team != null">
+          <span class="teamNames">{{ team.teamName }} </span>
+        </td>
+      </tr>
+    </tbody>
+  </table><div class="coteret">
+    <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>
+    <div class="txt">
+       טבלת ליגת העל בכדורגל לעונת 2019/2020
+      <br />
+  
+    שם ניחוש:
+    <input class="form-control" type="text" id="name" [(ngModel)]="this.pickName" disabled/>
+    נוחש ע"י:
+    <input class="form-control" id="pickBy" [(ngModel)]="this.pickBy" disabled/>
+    בתאריך:<br />
+    {{this.pickDate}}
+       </div>
+    קישור לטבלה:
+    <br />
+    <a href='/show?id={{this.id}}'>https://matanmou.github.io/iplTBpredict/show?id={{this.id}}</a><br />
+  <button type="button" class="btn btn-primary" [routerLink]='["/"]'>ליצירת טבלה חדשה</button>
+
+    </div>
+  </div>

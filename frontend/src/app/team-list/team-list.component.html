@@ -1,0 +1,17 @@
+<div class="modal-header" dir="rtl">
+  <h4 class="modal-title pull-left">בחר קבוצה למקום ה-{{palce}}</h4>
+  <button type="button" class="close pull-right cb" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="list-group">
+    <ng-container  *ngFor="let team of teams">
+    <button type="button" *ngIf="alreadyChose(team)" class="list-group-item list-group-item-action" (click)="teamChose(team.id)" [ngStyle]="setMyStyle(team)"> {{team.teamName}}</button>
+    <button type="button" *ngIf="!alreadyChose(team)" class="list-group-item list-group-item-action chos" (click)="teamChose(team.id)"><span class="chosen">{{team.teamName}}</span></button>
+  </ng-container>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default cb" (click)="bsModalRef.hide()">סגור</button>
+</div>

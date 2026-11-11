@@ -1,0 +1,63 @@
+<div class="container">
+<div class="row">
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col" class="mikum">מיקום</th>
+        <th scope="col" colspan="2">קבוצה</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let team of chosenTeams; let i = index">
+        <th scope="row" class="mikum">{{ i + 1 }}</th>
+        <td class="teamPos" *ngIf="team == null">
+          <img
+          class="addSign"
+          (click)="openModal(template, i + 1)"
+          src="assets/imgs/addBut21.png"
+          alt="הוסף קבוצה"
+          width="30px"
+          height="30px"
+          />
+        </td>
+        <td *ngIf="team == null" class="rfe">
+          בחר קבוצה
+        </td>
+        <td class="teamPos" *ngIf="team != null">
+          <span
+          class="egul"
+          (click)="openModal(template, i + 1)"
+          [ngStyle]="{
+            'background-color': team.pColor,
+            'border-color': team.sColor
+          }"
+          >
+  
+        </span>
+      </td>
+      <td *ngIf="team != null">
+        <span class=" teamNames">{{ team.teamName }} </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="coteret">
+  <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>
+  <div class="txt">
+    אתם מוזמנים לנחש ולבחור איך לדעתכם תיראה טבלת ליגת העל בכדורגל לעונת 2019/2020
+    <br />
+    <span class="litt">*אם לא מופיעות קבוצות - אנא עשו רענון לעמוד וזה יסתדר*</span><br />
+  שם ניחוש:
+  <input class="form-control" id="name"/>
+  נוחש ע"י:
+  <input class="form-control" id="pickBy"/>
+  <button type="button" *ngIf="this.load == false" class="btn btn-primary" (click)="submitPick()">שמירה</button>
+  <button class="btn btn-primary" *ngIf="this.load == true" type="button">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    טוען...
+  </button>
+  </div>
+</div>
+</div>
+</div>
