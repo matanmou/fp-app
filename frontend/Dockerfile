@@ -16,7 +16,6 @@ WORKDIR /app/frontend
 RUN npm ci
 
 # Copy the source and build for production
-COPY . .
 RUN npx ng build --prod
 
 # ---------- Stage 2: serve with nginx ----------
