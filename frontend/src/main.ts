@@ -1,12 +1,10 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import 'hammerjs';
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { setTheme } from 'ngx-bootstrap/utils';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
 
-if (environment.production) {
-  enableProdMode();
-}
+// The site is styled with Bootstrap 4 (RTL) – tell ngx-bootstrap to render BS4 markup.
+setTheme('bs4');
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+bootstrapApplication(AppComponent, appConfig)
   .catch(err => console.error(err));

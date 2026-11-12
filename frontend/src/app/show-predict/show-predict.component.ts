@@ -1,36 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 import { PickService } from '../pick.service';
+import { TeamsService } from '../teams.service';
 import { ChosenTeam } from '../models/chosen-team';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-show-predict',
+  imports: [RouterLink],
   templateUrl: './show-predict.component.html',
   styleUrls: ['./show-predict.component.css']
 })
-export class ShowPredictComponent implements OnInit {
-  chosenTeams:ChosenTeam[];
-  id:string;
-  pickName:string;
-  pickBy:string;
-  pickDate:string;
-  constructor(private pickService:PickService, private route: ActivatedRoute) {
-    this.pickService.pgTeams.subscribe(c=> {this.chosenTeams = c});
-  }
+export class ShowPredictComponent {
+  private readonly pickService = inject(PickService);
+  private readonly teamsService = inject(TeamsService);
 
-  ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-      setTimeout(()=>
-      {this.pickService.getPick(this.id);},400);
-  });
-  setTimeout(()=>{this.getNames()}, 400);
-  }
+  /** `?id=` query param (bound via withComponentInputBinding). */
+  readonly id = input<string | undefined>();
 
-  getNames(){
-    this.pickService.pickName.subscribe(p => {this.pickName = p;});
-    this.pickService.pickBy.subscribe(p=> {this.pickBy = p;});
-    this.pickService.pickDate.subscribe(p=> {this.pickDate = p;});
-  }
+  readonly chosenTeams = signal<(ChosenTeam | null)[]>([]);
+  readonly pickName = signal('');
+  readonly pickBy = signal('');
+  readonly pickDate = signal('');
 
+  constructor() {
+    effect(onCleanup => {
+      const id = this.id() ?? '';
+      const sub = forkJoin([this.pickService.getPick(id), this.teamsService.teams$]).subscribe({
+        next: ([p, teams]) => {
+          this.chosenTeams.set(this.pickService.pickToChosen(p, teams));
+          this.pickBy.set(p.userName);
+          this.pickDate.set(p.date);
+          this.pickName.set(p.predictName);
+        },
+        error: (err: HttpErrorResponse) => this.pickService.errorHandel(err)
+      });
+      onCleanup(() => sub.unsubscribe());
+    });
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-  
+
     <table class="table table-dark">
       <thead>
         <tr>
@@ -9,9 +9,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let team of chosenTeams; let i = index">
+        @for (team of chosenTeams(); track $index; let i = $index) {
+        <tr>
           <th scope="row" class="mikum">{{ i + 1 }}</th>
-          <td class="teamPos" *ngIf="team == null">
+          @if (team == null) {
+          <td class="teamPos">
             <img
             class="addSign"
             src="assets/imgs/addBut21blank.png"
@@ -20,41 +22,42 @@
             height="30px"
             />
           </td>
-          <td *ngIf="team == null" class="rfe">
+          <td class="rfe">
             לא נבחרה קבוצה
           </td>
-          <td class="teamPos" *ngIf="team != null">
+          } @else {
+          <td class="teamPos">
             <span
             class="egul"
-            [ngStyle]="{
-              'background-color': team.pColor,
-              'border-color': team.sColor
-            }"
+            [style.background-color]="team.pColor"
+            [style.border-color]="team.sColor"
             >
-            
+
           </span>
         </td>
-        <td *ngIf="team != null">
+        <td>
           <span class="teamNames">{{ team.teamName }} </span>
         </td>
+          }
       </tr>
+        }
     </tbody>
   </table><div class="coteret">
     <h1>ניחוש טבלת ליגת העל לעונת 2019 / 2020</h1>
     <div class="txt">
        טבלת ליגת העל בכדורגל לעונת 2019/2020
       <br />
-  
+
     שם ניחוש:
-    <input class="form-control" type="text" id="name" [(ngModel)]="this.pickName" disabled/>
+    <input class="form-control" type="text" id="name" [value]="pickName()" disabled/>
     נוחש ע"י:
-    <input class="form-control" id="pickBy" [(ngModel)]="this.pickBy" disabled/>
+    <input class="form-control" id="pickBy" [value]="pickBy()" disabled/>
     בתאריך:<br />
-    {{this.pickDate}}
+    {{ pickDate() }}
        </div>
     קישור לטבלה:
     <br />
-    <a href='/show?id={{this.id}}'>https://matanmou.github.io/iplTBpredict/show?id={{this.id}}</a><br />
+    <a [href]="'/show?id=' + (id() ?? '')">https://matanmou.github.io/iplTBpredict/show?id={{ id() ?? '' }}</a><br />
   <button type="button" class="btn btn-primary" [routerLink]='["/"]'>ליצירת טבלה חדשה</button>
 
     </div>

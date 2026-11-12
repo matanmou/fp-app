@@ -1,6 +1,6 @@
 # ---------- Stage 1: build the Angular app ----------
-# Angular 8 / TypeScript 3.4 need an older Node (12 is the newest that builds it cleanly)
-FROM node:12-alpine AS build
+# Angular 22 needs Node ^22.22.3 or ^24.15.0
+FROM node:24-alpine AS build
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ WORKDIR /app/frontend
 RUN npm ci
 
 # Copy the source and build for production
-RUN npx ng build --prod
+RUN npx ng build
 
 # ---------- Stage 2: serve with nginx ----------
 FROM nginx:1.25-alpine
@@ -25,7 +25,7 @@ FROM nginx:1.25-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Built files from stage 1
-COPY --from=build /app/dist/matanmoDotCom /usr/share/nginx/html
+COPY --from=build /app/frontend/dist/matanmoDotCom/browser /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

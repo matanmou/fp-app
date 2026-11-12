@@ -6,10 +6,13 @@
 </div>
 <div class="modal-body">
   <div class="list-group">
-    <ng-container  *ngFor="let team of teams">
-    <button type="button" *ngIf="alreadyChose(team)" class="list-group-item list-group-item-action" (click)="teamChose(team.id)" [ngStyle]="setMyStyle(team)"> {{team.teamName}}</button>
-    <button type="button" *ngIf="!alreadyChose(team)" class="list-group-item list-group-item-action chos" (click)="teamChose(team.id)"><span class="chosen">{{team.teamName}}</span></button>
-  </ng-container>
+    @for (team of teams; track team.id) {
+      @if (alreadyChose(team)) {
+    <button type="button" class="list-group-item list-group-item-action" (click)="teamChose(team.id)" [style]="setMyStyle(team)"> {{team.teamName}}</button>
+      } @else {
+    <button type="button" class="list-group-item list-group-item-action chos" (click)="teamChose(team.id)"><span class="chosen">{{team.teamName}}</span></button>
+      }
+    }
   </div>
 </div>
 <div class="modal-footer">

@@ -7,3 +7,5 @@ e2e
 *.md
 Dockerfile
 .dockerignore
+_backup-angular8
+.angular

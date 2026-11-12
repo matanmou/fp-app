@@ -1,20 +1,24 @@
-import { Injectable, Inject } from '@angular/core';
-import { Team } from './models/team';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, of, shareReplay } from 'rxjs';
+import { Team } from './models/team';
+import { DB_URL } from './tokens';
 
-
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TeamsService {
-  teams: Team[] = [];
-  api:string;
+  private readonly http = inject(HttpClient);
+  private readonly api = inject(DB_URL) + '/ipl-predict/teams';
 
-  constructor(private http:HttpClient, @Inject('dbUrl')api:string) {
-    this.api = api+'/ipl-predict/teams';
-    this.getTeams();
-   }
+  /** All teams, fetched once and shared. */
+  readonly teams$ = this.http.get<Team[]>(this.api).pipe(
+    catchError(err => {
+      console.error('Failed to load teams', err);
+      return of([] as Team[]);
+    }),
+    shareReplay(1)
+  );
 
-   getTeams():any{
-    this.http.get<any>(this.api).subscribe(t=> {this.teams = t});
-  }   
+  /** Teams as a signal (empty until loaded). */
+  readonly teams = toSignal(this.teams$, { initialValue: [] as Team[] });
 }

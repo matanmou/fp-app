@@ -9,37 +9,40 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let team of chosenTeams; let i = index">
+      @for (team of chosenTeams(); track $index; let i = $index) {
+      <tr>
         <th scope="row" class="mikum">{{ i + 1 }}</th>
-        <td class="teamPos" *ngIf="team == null">
+        @if (team == null) {
+        <td class="teamPos">
           <img
           class="addSign"
-          (click)="openModal(template, i + 1)"
+          (click)="openModal(i + 1)"
           src="assets/imgs/addBut21.png"
           alt="הוסף קבוצה"
           width="30px"
           height="30px"
           />
         </td>
-        <td *ngIf="team == null" class="rfe">
+        <td class="rfe">
           בחר קבוצה
         </td>
-        <td class="teamPos" *ngIf="team != null">
+        } @else {
+        <td class="teamPos">
           <span
           class="egul"
-          (click)="openModal(template, i + 1)"
-          [ngStyle]="{
-            'background-color': team.pColor,
-            'border-color': team.sColor
-          }"
+          (click)="openModal(i + 1)"
+          [style.background-color]="team.pColor"
+          [style.border-color]="team.sColor"
           >
-  
+
         </span>
       </td>
-      <td *ngIf="team != null">
+      <td>
         <span class=" teamNames">{{ team.teamName }} </span>
       </td>
+        }
     </tr>
+      }
   </tbody>
 </table>
 <div class="coteret">
@@ -49,14 +52,17 @@
     <br />
     <span class="litt">*אם לא מופיעות קבוצות - אנא עשו רענון לעמוד וזה יסתדר*</span><br />
   שם ניחוש:
-  <input class="form-control" id="name"/>
+  <input class="form-control" id="name" #nameInput/>
   נוחש ע"י:
-  <input class="form-control" id="pickBy"/>
-  <button type="button" *ngIf="this.load == false" class="btn btn-primary" (click)="submitPick()">שמירה</button>
-  <button class="btn btn-primary" *ngIf="this.load == true" type="button">
+  <input class="form-control" id="pickBy" #pickByInput/>
+  @if (!load()) {
+  <button type="button" class="btn btn-primary" (click)="submitPick(nameInput.value, pickByInput.value)">שמירה</button>
+  } @else {
+  <button class="btn btn-primary" type="button">
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     טוען...
   </button>
+  }
   </div>
 </div>
 </div>
