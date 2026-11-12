@@ -5,11 +5,11 @@ import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOpti
 
 const config: MysqlConnectionOptions = {
     "type": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "database": "ipflDB",
-    "username": "root",
-    "password": "changeme",
+    "host": process.env.DB_HOST,
+    "port": parseInt(process.env.DB_PORT, 10),
+    "database": process.env.DB_NAME,
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASSWORD,
     "entities": [
         IplPredictPicks,
         IplPredictTeams
