@@ -1,0 +1,9 @@
+node_modules
+dist
+.firebase
+.git
+.gitignore
+e2e
+*.md
+Dockerfile
+.dockerignore
