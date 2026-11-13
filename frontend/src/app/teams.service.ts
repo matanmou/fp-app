@@ -8,7 +8,7 @@ import { DB_URL } from './tokens';
 @Injectable({ providedIn: 'root' })
 export class TeamsService {
   private readonly http = inject(HttpClient);
-  private readonly api = inject(DB_URL) + '/ipl-predict/teams';
+  private readonly api = inject(DB_URL) + 'ipl-predict/teams';
 
   /** All teams, fetched once and shared. */
   readonly teams$ = this.http.get<Team[]>(this.api).pipe(

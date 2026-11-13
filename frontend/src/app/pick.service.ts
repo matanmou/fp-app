@@ -11,7 +11,7 @@ import { DB_URL } from './tokens';
 export class PickService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly api = inject(DB_URL) + '/ipl-predict/picks';
+  private readonly api = inject(DB_URL) + 'ipl-predict/picks';
 
   postPick(pick: Pick): Observable<Pick> {
     return this.http.post<Pick>(this.api, pick);

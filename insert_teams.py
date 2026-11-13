@@ -22,8 +22,8 @@ DB_CONFIG = {
     "host": "localhost",
     "port": 3306,
     "user": "root",
-    "password": "changeme",
-    "database": "ipflDB",
+    "password": "matanmo93",
+    "database": "ipldb",
 }
 
 # TypeORM names the table after the entity class in lowercase by default

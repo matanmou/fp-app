@@ -1,6 +1,7 @@
 server {
     listen 80;
     root /usr/share/nginx/html;
+    server_name _;
     index index.html;
 
     location /ipl-predict/ {
