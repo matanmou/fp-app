@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  webAPI: '/',
+  webAPI: 'https://ipltb-backend:3000',
 };
