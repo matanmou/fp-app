@@ -5,7 +5,7 @@ server {
     index index.html;
 
     location /ipl-predict/ {
-        proxy_pass ${BACKEND_URL}/;
+        proxy_pass ${BACKEND_URL};
     }
 
     location / {
