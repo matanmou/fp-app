@@ -28,6 +28,7 @@ export class SeedTeams1794800619810 implements MigrationInterface {
     const [{ cnt }] = await queryRunner.query(
       'SELECT COUNT(*) AS cnt FROM `iplpredict_teams`',
     );
+    console.log(`Found ${cnt} rows in iplpredict_teams table`);
     if (Number(cnt) > 0) return;
 
     const placeholders = TEAMS.map(() => '(?, ?, ?)').join(', ');

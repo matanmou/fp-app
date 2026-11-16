@@ -26,6 +26,8 @@ const config: MysqlConnectionOptions = {
     // Apply pending migrations on startup; each one runs in its own transaction.
     migrationsRun: process.env.DB_MIGRATIONS_RUN !== 'false',
     migrationsTransactionMode: 'each',
+    // Print migration activity (and errors) to the pod logs.
+    logging: ['error', 'warn', 'migration'],
 };
 
 export default config;
