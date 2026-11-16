@@ -19,7 +19,7 @@ except ModuleNotFoundError as err:
 
 # --- Connection settings: edit these ---------------------------------------
 DB_CONFIG = {
-    "host": "localhost",
+    "host": "127.0.0.1",
     "port": 3306,
     "user": "root",
     "password": "matanmo93",
