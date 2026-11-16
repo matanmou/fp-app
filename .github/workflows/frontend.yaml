@@ -34,6 +34,7 @@ jobs:
     steps:
       - name: Trigger workflow in DevOps repository
         uses: actions/github-script@v6
+        github-token: ${{ secrets.DISPATCH_TOKEN }}
         with:
           script: |  
             const response = await github.request('POST /repos/{owner}/{repo}/dispatches', {
@@ -45,6 +46,3 @@ jobs:
               }
             });
             console.log('Trigger sent to DevOps repository:', response.status);
-
-        env:
-          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
