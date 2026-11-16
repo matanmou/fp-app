@@ -35,4 +35,5 @@ EXPOSE 3000
 
 # Run as the non-root "node" user that ships with the image
 USER node
+
 CMD ["node", "dist/src/main.js"]
