@@ -44,6 +44,6 @@ jobs:
               }
             });
             console.log('Trigger sent to DevOps repository:', response.status);
-\
+
         env:
           GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
