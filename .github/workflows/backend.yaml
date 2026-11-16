@@ -25,4 +25,3 @@ jobs:
       - name: print success message
         run: |
           echo "Tests completed successfully."
-send trigger to devops repo:
