@@ -10,9 +10,11 @@ on:
     
 jobs:
   test:
+    name: "1. Run Frontend Tests"
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -21,8 +23,27 @@ jobs:
         run: npm install
         working-directory: ./frontend
       - name: Run tests
-        run: npm test
+        run: npm test -- --watch=false
         working-directory: ./frontend
       - name: print success message
-        run: |
-          echo "Tests completed successfully."
+        run: echo "Tests completed successfully."
+  send trigger to infrastructure repo:
+    name: "2. Send Trigger to DevOps Repo"
+    needs: test
+    steps:
+      - name: Trigger workflow in DevOps repository
+        uses: actions/github-script@v6
+        with:
+          script: |  
+            const response = await github.request('POST /repos/{owner}/{repo}/dispatches', {
+              owner: 'matanmou',
+              repo: 'fp-infra',
+              event_type: 'frontend-updated',
+              client_payload: {
+                sha: '${{ github.sha }}'
+              }
+            });
+            console.log('Trigger sent to DevOps repository:', response.status);
+\
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
