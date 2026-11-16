@@ -21,4 +21,5 @@ jobs:
         run: npm test
         working-directory: ./frontend
       - name: print success message
-        run: echo "Tests completed successfully."
+        run: |
+          echo "Tests completed successfully."
