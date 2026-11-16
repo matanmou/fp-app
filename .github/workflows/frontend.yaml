@@ -21,7 +21,7 @@ jobs:
         run: npm install
         working-directory: ./frontend
       - name: Run tests
-        run: npm test
+        run: ng test
         working-directory: ./frontend
       - name: print success message
         run: |
