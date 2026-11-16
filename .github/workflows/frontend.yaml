@@ -34,8 +34,8 @@ jobs:
     steps:
       - name: Trigger workflow in DevOps repository
         uses: actions/github-script@v6
-        github-token: ${{ secrets.DISPATCH_TOKEN }}
         with:
+          github-token: ${{ secrets.DISPATCH_TOKEN }}
           script: |  
             const response = await github.request('POST /repos/{owner}/{repo}/dispatches', {
               owner: 'matanmou',
