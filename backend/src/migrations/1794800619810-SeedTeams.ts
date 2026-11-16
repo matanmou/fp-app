@@ -7,6 +7,7 @@ const TEAMS: Array<[string, string, string]> = [
   ['Beitar Jerusalem', '#FFD700', '#000000'],
   ['Hapoel Tel Aviv', '#E30613', '#FFFFFF'],
   ['Hapoel Jerusalem', '#E30613', '#000000'],
+  ['Hapoel Haifa', '#E30613', '#000000'],
   ['Hapoel Petah Tikva', '#0055A4', '#FFFFFF'],
   ['Maccabi Netanya', '#FFD700', '#000000'],
   ['Bnei Sakhnin', '#E30613', '#FFFFFF'],
