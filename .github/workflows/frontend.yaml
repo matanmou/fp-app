@@ -29,10 +29,10 @@ jobs:
         run: echo "Tests completed successfully."
   send trigger to infrastructure repo:
     name: "2. Send Trigger to DevOps Repo"
+    runs-on: ubuntu-latest
     needs: test
     steps:
       - name: Trigger workflow in DevOps repository
-        runs-on: ubuntu-latest
         uses: actions/github-script@v6
         with:
           script: |  
