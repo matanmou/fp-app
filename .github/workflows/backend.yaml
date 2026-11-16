@@ -29,12 +29,12 @@ jobs:
         run: echo "Tests completed successfully."
   deploy:
     name: "3. Deploy via fp-infra"
-    needs: build-image
+    needs: test
     uses: matanmou/fp-infra/.github/workflows/backend.yaml@main
     with:
       image: matanmo93/fp-backend:${{ github.sha }}
     secrets:
-      SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   after-deploy:
     name: "4. After deploy"
