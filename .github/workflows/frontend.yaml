@@ -5,6 +5,9 @@ on:
       - main
     paths:
       - 'frontend/**'
+    workflows_dispatch:
+      - workflow: frontend.yaml
+    
 jobs:
   test:
     runs-on: ubuntu-latest
