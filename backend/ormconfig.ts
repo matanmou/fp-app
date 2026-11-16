@@ -14,7 +14,7 @@ const config: MysqlConnectionOptions = {
         IplPredictPicks,
         IplPredictTeams
     ],
-    "synchronize": true
+    "synchronize": false
 };
 
 export default config;
