@@ -27,7 +27,7 @@ jobs:
         working-directory: ./frontend
       - name: print success message
         run: echo "Tests completed successfully."
-  send trigger to infrastructure repo:
+  send-trigger-to-infrastructure-repo:
     name: "2. Send Trigger to DevOps Repo"
     runs-on: ubuntu-latest
     needs: test
