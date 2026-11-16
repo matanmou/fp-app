@@ -28,7 +28,7 @@ jobs:
       - name: print success message
         run: echo "Tests completed successfully."
   deploy:
-    name: "3. Deploy via fp-infra"
+    name: "2. Deploy via fp-infra"
     needs: test
     uses: matanmou/fp-infra/.github/workflows/backend.yaml@main
     with:
@@ -37,7 +37,7 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   after-deploy:
-    name: "4. After deploy"
+    name: "3. After deploy"
     runs-on: ubuntu-latest
     needs: deploy
     steps:

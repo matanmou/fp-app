@@ -27,22 +27,18 @@ jobs:
         working-directory: ./frontend
       - name: print success message
         run: echo "Tests completed successfully."
-  send-trigger-to-infrastructure-repo:
-    name: "2. Send Trigger to DevOps Repo"
-    runs-on: ubuntu-latest
+  deploy:
+    name: "2. Deploy via fp-infra"
     needs: test
+    uses: matanmou/fp-infra/.github/workflows/frontend.yaml@main
+    with:
+      image: matanmo93/fp-frontend:${{ github.sha }}
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  after-deploy:
+    name: "3. After deploy"
+    runs-on: ubuntu-latest
+    needs: deploy
     steps:
-      - name: Trigger workflow in DevOps repository
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.DISPATCH_TOKEN }}
-          script: |  
-            const response = await github.request('POST /repos/{owner}/{repo}/dispatches', {
-              owner: 'matanmou',
-              repo: 'fp-infra',
-              event_type: 'frontend-updated',
-              client_payload: {
-                sha: '${{ github.sha }}'
-              }
-            });
-            console.log('Trigger sent to DevOps repository:', response.status);
+      - run: echo "Deployed ${{ needs.deploy.outputs.deployed-image }}, continuing..."
