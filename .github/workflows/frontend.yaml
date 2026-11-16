@@ -32,6 +32,7 @@ jobs:
     needs: test
     steps:
       - name: Trigger workflow in DevOps repository
+        runs-on: ubuntu-latest
         uses: actions/github-script@v6
         with:
           script: |  
