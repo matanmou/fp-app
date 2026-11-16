@@ -6,7 +6,7 @@ on:
     paths:
       - 'frontend/**'
     workflows_dispatch:
-      - workflow: frontend.yaml
+
     
 jobs:
   test:
