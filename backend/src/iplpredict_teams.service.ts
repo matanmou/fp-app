@@ -25,7 +25,7 @@ export class IplPredictTeamstService {
         { teamName: 'Maccabi Petah Tikva', pColor: '#0055A4', sColor: '#FFFFFF' },
         { teamName: 'Hapoel Ramat Gan', pColor: '#E30613', sColor: '#FFFFFF' },
       ];
-
+      console.log('Seeding IPL Predict Teams data...');
       await this.teams.save(teamsData);
     }
   }
